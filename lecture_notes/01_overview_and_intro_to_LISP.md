@@ -111,3 +111,92 @@ Really, we're writing trees.
 
 
 >>> Really whats going on are we're writing trees, and parentheses are just a way to write a two-dimensionally structure as a linear character string.
+
+### Let's ASK LISP !!
+
+```clojure
+(+ 3 4 8)
+;; 15
+```
+
+HOLY SHIT!
+
+```clojure
+(+ (* 3 (+ 7 13.5)) 4)
+;; 54.5
+```
+
+my god.
+
+```clojure
+;; indentation, "pretty printing"
+
+(+ (* 3 5)
+   (* 47
+      (- 20 6.8))
+   12)
+;; 647.4 (or something)
+```
+
+Wow. Well, those are the primitives, eg. the Means of Combination. Let's move on to...
+
+### The Means of **Abstraction**
+
+We use `DEFINE`,
+
+```clojure
+(DEFINE A (+ 5 5))
+
+(+ A A) ;; -> 625
+
+(DEFINE B (+ A (* 5 A)))
+B ;; -> 150
+
+(* A (/ B 5)) ;; -> 55
+```
+
+Let's say we want to name the general term for, 'multiplying a number by itself' -- how would this be written?
+
+```clojure
+(DEFINE (square x)
+  (* x x))
+
+;; use it in a sentence..
+
+    TO   SQUARE SOMETHING
+(DEFINE (square x)
+  (* x x))
+   ^ ^ ^
+MULT IT BY ITSELF
+```
+
+sort of yes!
+
+> A notation for defining a procedure
+
+However, it's still kind of confusing. It's not totally clear that you're _naming something_.
+
+```clojure
+(DEFINE SQUARE (LAMBDA (x) (* x x)))
+```
+
+Here, we're clearly naming something `SQUARE`.
+- `Lambda` is Lisp's way of saying 'make a procedure'
+
+In general, we'll be using the more concise, first form. However try to keep in mind that to the Lisp interpreter, there is no difference between the two, and in fact, what we're asking semantically is closer to the second form.
+
+```clojure
+(define square
+  (lambda (x) (* x x) ))
+    ;; MAKE A PROCEDURE
+          ;; WITH THE ARGUMENT 'X'
+              ;; THAT RETURNS THE RESULT OF MULTIPLYING X BY X
+```
+
+In this 1986 lecture, the author defines this ability
+for an interpreter to accept either form, with one
+being more human-readable as... (drum roll)
+
+### Syntactic Sugar
+
+"Having somewhat more convenient surface forms for typing something"
