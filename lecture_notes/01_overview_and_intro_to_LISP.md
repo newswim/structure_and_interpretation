@@ -431,4 +431,4 @@ This is called _Block Structure_.
 #### COMING UP!
 
 - _How it is_... that you make a link between the procedure and the processes within the machine.
-- _How it is_... that you use the power of Lisp to talk not only about not only little computations, but about general, conventional methods of doing things.
+- _How it is_... that you use the power of Lisp to talk not only about little computations, but about more general, conventional methods of doing things.
