@@ -200,3 +200,235 @@ being more human-readable as... (drum roll)
 ### Syntactic Sugar
 
 "Having somewhat more convenient surface forms for typing something"
+
+```clojure
+(DEFINE (SQUARE X) (* X X))   ;; -> SQUARE
+(SQUARE 1001)                 ;; -> 1002001
+(SQUARE (+ 5 7))              ;; -> 144
+(+ (SQUARE 3) (SQUARE 4))     ;; -> 25
+
+;; We can also use it in something more complicated.
+
+(SQUARE (SQUARE (SQUARE 1001)))     ;; 10050010002...
+
+;; And, if we just ask the definition..
+
+SQUARE
+;; #[COMPOUND-PROCEDURE SQUARE]
+```
+
+#### Two more examples of defining
+
+```clojure
+(define (average x y)
+  (/ (+ x y) 2))
+
+(define (mean-square x y)
+  (average (square x)
+           (square y)))
+```
+
+Having defined `average` and `square`, we can start talking about the 'mean-square' of something.
+
+Having defined `SQUARE`, it can be used _AS IF_ it were a primitive. It doesn't matter whether it was something built into the language, or something that we ourselves have defined.
+
+This is a key thing in Lisp.
+
+> The things you construct have all the power and flexibility as if they were primitives.
+
+```clojure
++
+;; #[COMPOUND-PROCEDURE +]
+```
+
+You should not be able to tell, in general, between things that are built in, and things that are compound. Why? Because the things that are compound have been wrapped in an abstraction.
+
+### Example: Absolute Value Function
+
+This is what's called a *Case Analysis*
+
+```math
+          { -x  for  x < 0 }
+abs(x) =  {  0  for  x = 0 }
+          {  x  for  x > 0 }
+```
+
+```clojure
+(DEFINE (ABS X)
+  (COND ((< X 0) (- X))       ;; clauses for COND
+        ((= X 0) 0)
+        ((> X 0) X)))
+```
+
+- `-` is a subtraction OR negation operator (depending on # args)
+
+```clojure
+(define (abs x)
+ (if (< x 0)
+     (- x)
+     x))
+```
+
+This form is essentially the same. Either can be thought of as syntactic sugar.
+
+### Which/When of `DEFINE`
+
+You might use `DEFINE` slightly differently depending on whether or not you're defining a procedure.
+
+```clojure
+(DEFINE (SQUARE X) (* X X))
+;; or
+(DEFINE SQUARE (LAMBDA (X) (* X X)))
+```
+
+The first is a kind of special, but probably more common case, for defining procedures. The second can be thought of as 'Define the _symbol_ `SQUARE`'
+
+Yup. // TODO: wtf.
+
+NOTES:
+- are there any structural differences between the two?
+- are there any concerns to do with memory, performance, etc.?
+- is the first one a Lambda function?
+
+> A little more on that whole thing...
+
+```clojure
+;; this is sort of -definition- vs -expression-
+
+(define a (* 5 5))
+
+(define (d) (* 5 5))
+
+;; when used, results..
+
+a       ;; -> 25
+d       ;; -> compound-procedure d
+(d)     ;; -> 25 (same as evocation with 0 args)
+(a)     ;; -> error , (25 is not an operator that can be applied)
+
+(* a a) ;; -> 25
+
+```
+
+### The Heron of Alexandria example
+
+```
+TO FIND AN APPROXIMATION TO SQRT(X)
+- Make a guess  (G)
+- Improve the guess by averaging G and X/G
+- Keep improving the guess until it is good enough
+- Use 1 as an initial guess
+```
+
+A method of successive averaging. Let's write it in Lisp!
+
+but wait.. what it is mean 'to try a guess for the square root of x'?
+
+```clojure
+(DEFINE (TRY X)
+  (IF (GOOD-ENOUGH? GUESS X)
+  GUESS
+  (TRY (IMPROVE GUESS X) X)))
+```
+
+The next part states, in order to compute square roots..
+
+```clojure
+(DEFINE (SQRT X) (TRY 1 X))
+```
+
+Ok but, how is a guess good enough? How do we improve a guess?
+
+```clojure
+(define (improve guess x)
+    (average guess (/ x guess)))
+
+(define (good-enough? guess x)
+    (< (abs (- (square guess) x))
+    .001))
+```
+
+- To improve, we average the guess with the quotient of dividing `x` by the `guess`.
+- To check if it's good enough, one way is to ask, 'when I take this guess and square it, then subtract x, do I get a small enough number left over?'
+
+#### Let's look at the structure of that a little bit...
+
+- `SQRT` - some type of module, that is defined in terms of `TRY`, etc.
+
+```raw
+            `SQRT`
+              |
+            `TRY`
+            /    \
+    GOOD-ENOUGH?  IMPROVE
+       /     \        \
+     ABS    SQUARE    AVG
+```
+
+But wait.. `TRY` is defined in terms of `GOOD-ENOUGH?` and `IMPROVE`, but also in terms of `TRY` again. It's definition includes its own implementation, which may make a geometer gag.
+
+But in a way, it must know what Trying is, in order to define what it is doing.
+
+We can write down what this means..
+
+```clojure
+(SQUARE 2)
+..
+(TRY 1 2)
+..
+(TRY (IMPROVE 1 2) 2) ;; average of 1 and 2/1 -> 1.5
+
+...
+(TRY 1.5 2)
+..
+(TRY (AVERAGE 1.5 (/ 2 1.5)) 2)
+..
+(TRY 1.3333 2)
+...
+(TRY 1.41667 2)
+...
+;; -> 1.41421568
+```
+
+this is constantly _reducing_, in a sense.
+
+Good enough.
+
+#### Recursive Definition (is what that is)
+
+- Allows for infinite computations that go on until something is true.
+
+```clojure
+(define (sqrt x)
+    (define (improve guess)
+        (average guess (/ x guess)))
+    (define (good-enough? guess)
+        (< (abs (- (square guess) x))
+        .001))
+    (define (try guess)
+        (if (good-enough? guess)
+            guess
+            (try (improve guess))))
+    (try 1))
+```
+
+- `improve`, `good-enough?` and `try` are all packages inside of the `SQRT` module.
+
+This is called _Block Structure_.
+
+#### Summarize
+
+- What are we doing?
+> Expressing imperative knowledge.
+
+|                      | Procedures              | Data   |
+|----------------------|-------------------------|--------|
+| Primitive Elements   | + * < =                 | 4 15.6 |
+| Means of Combination | () composition  COND IF |        |
+| Means of Abstraction | DEFINE                  |        |
+
+
+#### COMING UP!
+
+- _How it is_... that you make a link between the procedure and the processes within the machine.
+- _How it is_... that you use the power of Lisp to talk not only about not only little computations, but about general, conventional methods of doing things.
