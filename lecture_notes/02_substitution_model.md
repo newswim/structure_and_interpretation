@@ -140,5 +140,105 @@ Let's illustrate this in the context of a particular program.
 (DEFINE (+ X Y)
   (IF (= X 0)
     Y
-    (+ (-1+ X) (1+ Y))))
+    (+ (-1+ X) (1+ Y)))) ;; -1+ == decrement operator; 1+ == increment
 ```
+
+## Segment 2!
+
+We now have a reasonable mechanical model for _how_ a program built out of procedures and expressions "evolves" a process. Let's now try to build up an intuition about how _particular_ programs evolve particular processes, and their shape.
+
+#### Visualizing
+
+Can we imagine a resulting image, just by looking at the components of which it is made? Can you imagine what a final image will look like, given on the facts about particular film, aperture and lighting conditions?
+
+> I have so many pens in my pocket.
+
+#### "Test strips"
+
+Examining a range of items with a few of variants that might give us a contrast to study.
+
+```clojure
+;; === Peano Arithmetic ===
+;; Two ways to add whole numbers:
+
+(define (+ x y)
+  (if (= x 0)
+    y
+    (+ (-1+ x) (1+ y))))
+
+(define (+ x y)
+  (if (= x 0)
+      y
+      (1+ (+ (-1+ x) y))))
+
+```
+
+These two programs are very similar, the only different being **_where_** we've placed the increment. Two illustrate these, we'll rewrite these two programs while we also _evole_ the process.
+
+```clojure
+(define (+ x y)
+  (if (= x 0)
+      y
+      (+ (-1+ x) (1+ y))))
+
+;; -> (+ 3 4)
+(+ (-1+ 3) (1+ y))
+;; -> (+ 2 5)
+(+ (-1+ 2) (1+ 5))
+;; -> (+ 1 6)
+(+ (-1+ 1) (1+ 6))
+;; -> (+ 0 7)
+;; -> 7
+
+```
+
+For the other program:
+
+```clojure
+(define (+ x y)
+  (if (= x 0)
+      y
+      (1+ (+ (-1+ x) y))))
+
+;; (+ 3 4)
+;; (1+ (+ (-1+ 3) 4))
+(1+ (+ 2 4))            ;; apply the + operation again
+(1+ (1+ (+ 1 4)))       ;; ...and again
+(1+ (1+ (1+ (+ 0 4))))  ;; Ah! we can just return 4 as the consequent
+(1+ (1+ (1+ 4)))
+(1+ (1+ 5))
+(1+ 6)
+;; 7
+```
+
+**These two processes have very different shapes.**
+
+The first one, we might notice, has a directed-ness that feels somewhat straight. Like an arrow pointing downward. The right boundary does not vary particularly.
+
+The second almost looks like a pyramid turned sideways. The increments sort of fan out, and the recede later, as we build up and then evaluate operations.
+
+We can think of these steps as occurring in time. And the number of steps as being approximate to the amount of time that they take to execute. Conversely, there is a dimension of space analogous to the width, or amount of memory that the process is going to take up.
+
+
+#### Linear **Iteration** process
+
+- Time = O(n)
+- Space = O(1)
+
+The `time` of the process is on the _Order of x_, it is proportional to X by some constant proportionality (and we're not concerned what that proportionality is). The `space` complexity is constant -- it is proportional to `1`.
+
+Thus this tells us a bound, (any machine could perform this in constant space). This _algorithm_ represented by this procedure is executable in constant space.
+
+The model is ignoring certain things, like bigger numbers take up more space... and some other things.
+
+
+#### Linear **Recursion** process
+
+Our example was that second program. It turns out that the time complexity grows as a proportion of its input, rather than the number of items.
+
+- Time = O(x)
+- Space = O(x)
+
+> What's the essence of this matter? This matter is not so obvious. Maybe their are other models for which we can talk about the differences between iterative and recursive processes. The two examples we gave are both recursive definitions. They both refer to the thing being defined within the process itself, but they lead to differently shaped processes. Note that there is nothing special about the fact that the definition is recursive, that leads to a recursive process.
+
+## Another model: Bureaucracy
