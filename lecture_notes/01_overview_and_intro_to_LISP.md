@@ -109,6 +109,7 @@ Really, we're writing trees.
 
 ```
 
+### This is called `tree accumulation`
 
 >>> Really whats going on are we're writing trees, and parentheses are just a way to write a two-dimensionally structure as a linear character string.
 

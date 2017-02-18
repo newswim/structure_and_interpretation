@@ -4,7 +4,7 @@
 
 ### What is it that programmers do?
 
-To design processes that accomplish particular goals. Such as finding the square roots of numbers, or anything else. The way a programmer does this is by constructing spells. These are built out of instructions and expressions. In order for a programmer to do this effectively, they have to understand the relationship between the particular things that he rights, and the behavior of the process that they're attempting to control.
+Design processes which achieve particular goals. Such as finding the square roots of numbers, or anything else. The way a programmer does this is by constructing spells. These are built out of instructions and expressions. In order for a programmer to do this effectively, they have to understand the relationship between the particular tasks that he writes, and the behavior of the process that they're attempting to control.
 
 What we're going to attempt to do in this lecture is establish that connection in the clearest way possible. Particularly, to understand how patterns (of procedures and expressions) cause particular patterns of execution (particular behaviors) from the processes.
 

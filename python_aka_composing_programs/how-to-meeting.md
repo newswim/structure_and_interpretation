@@ -37,3 +37,10 @@
 	- Take particular note of _how_ and _what_ you may have been confused about
 	- ... and what wording or examples help to get clarity
 - Tell everyone THANK YOU for participating!
+
+How's this:
+## Homework
+- Read sections 1.1 and 1.2
+## Next time
+- Read 1.3 as a group and (maybe) begin looking at 2.1
+- Bring comparisons / examples from other languages that we think are neat
