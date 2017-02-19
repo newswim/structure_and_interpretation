@@ -7,6 +7,7 @@ These notes are meant to catalog my reactions to the MIT 6.001 course as present
 - A new [HTML version](http://sarabander.github.io/sicp/)
 - An older [TextInfo format](http://www.neilvandyke.org/sicp-texi/)
 - [Video-to-Chapter map](http://community.schemewiki.org/?sicp-text-to-video-map) and [Community-Scheme-Wiki](http://community.schemewiki.org/)
+- [Berkeley CS51AS](http://berkeley-cs61as.github.io) - Self-paced overview of SICP for Racket/Scheme
 
 #### Python
 
@@ -26,6 +27,14 @@ These notes are meant to catalog my reactions to the MIT 6.001 course as present
   - [4](http://www.afronski.pl/sicp-in-clojure/2015/10/05/sicp-in-clojure-chapter-4.html)
   - [5](http://www.afronski.pl/sicp-in-clojure/2015/10/19/sicp-in-clojure-chapter-5.html)
 
+#### Racket
+
+- [MIT 6.037 - SICP](http://web.mit.edu/alexmv/6.S184/)
+
+### Opinion Pieces
+
+  - [Easing in to SICP](https://hn.premii.com/#/comments/2115756)
+
 ### `How To Design Programs`
 
 In some ways, the descendent of SICP, meant to be used along with Racket
@@ -33,7 +42,3 @@ In some ways, the descendent of SICP, meant to be used along with Racket
 - [How to Design Programs (Online)](http://htdp.org/)
 - [2nd Edition](http://www.ccs.neu.edu/home/matthias/HtDP2e/)
 - [2nd Edition (current draft)](http://www.ccs.neu.edu/home/matthias/HtDP2e/Draft/index.html)
-
-### Opinions
-
-- [Easing in to SICP](https://hn.premii.com/#/comments/2115756)
