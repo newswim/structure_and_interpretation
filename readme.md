@@ -33,3 +33,7 @@ In some ways, the descendent of SICP, meant to be used along with Racket
 - [How to Design Programs (Online)](http://htdp.org/)
 - [2nd Edition](http://www.ccs.neu.edu/home/matthias/HtDP2e/)
 - [2nd Edition (current draft)](http://www.ccs.neu.edu/home/matthias/HtDP2e/Draft/index.html)
+
+### Opinions
+
+- [Easing in to SICP](https://hn.premii.com/#/comments/2115756)
