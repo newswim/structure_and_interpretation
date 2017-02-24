@@ -242,3 +242,5 @@ Our example was that second program. It turns out that the time complexity grows
 > What's the essence of this matter? This matter is not so obvious. Maybe their are other models for which we can talk about the differences between iterative and recursive processes. The two examples we gave are both recursive definitions. They both refer to the thing being defined within the process itself, but they lead to differently shaped processes. Note that there is nothing special about the fact that the definition is recursive, that leads to a recursive process.
 
 ## Another model: Bureaucracy
+
+> Let's say there's someone called GJS ()

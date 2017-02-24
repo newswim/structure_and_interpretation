@@ -433,3 +433,51 @@ This is called _Block Structure_.
 
 - _How it is_... that you make a link between the procedure and the processes within the machine.
 - _How it is_... that you use the power of Lisp to talk not only about little computations, but about more general, conventional methods of doing things.
+
+
+> tree accumulation.
+
+## `COND`
+
+### Logical Operators
+
+```clojure
+(define (square-sum-larger a b c)
+	(cond ((and (< a b) (< a c)) (+ (* b b) (* c c)))
+        ((and (< b a) (< b c)) (+ (* a a) (* c c)))
+        (else (+ (* a a) (* b b)))))
+
+(square-sum-larger 1 2 3)
+;; 13
+(square-sum-larger 13 6 4)
+;; 205
+```
+
+
+```clojure
+; Original Guess-And-Square method of finding Square Roots
+
+(define (square x)
+  (* x x))
+
+(define (sqrt-iter guess x)
+  (if (good-enough? guess x)
+      guess
+      (sqrt-iter (improve guess x)
+                 x)))
+
+(define (good-enough? guess x)
+  (< (abs (- (square guess) x)) 0.001))
+
+(define (average x y)
+  (/ (+ x y) 2))
+
+(define (improve guess x)
+  (average guess (/ x guess)))
+
+(define (sqrt x)
+  (sqrt-iter 1.0 x))
+
+(sqrt 8)
+
+```
