@@ -254,3 +254,5 @@ track of evaluation
 same answer
 
 Recursive processes "Employ more people, and therefor might be better"
+
+> Pretty soon we're gonna use this intuition to build Big, hairy complicated systems

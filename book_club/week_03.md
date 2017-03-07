@@ -22,6 +22,12 @@ http://mathworld.wolfram.com/PeanosAxioms.html
 http://mathworld.wolfram.com/PeanoArithmetic.html
 
 
+
+## Bound Variables and Free Variables
+
+- How are these defined?
+
+
 ### `If` statements
 
 Have the signature...
