@@ -244,3 +244,13 @@ Our example was that second program. It turns out that the time complexity grows
 ## Another model: Bureaucracy
 
 > Let's say there's someone called GJS ()
+
+What are we getting at? There is a significant difference in the _way_ in which
+**iterative** processes and **recursive** processes work. A few bullet points:
+
+- Iterative processes can be stopped & restarted at any point, without losing
+track of evaluation
+- We can remove previous steps from iterative processes, and still arrive at the
+same answer
+
+Recursive processes "Employ more people, and therefor might be better"
